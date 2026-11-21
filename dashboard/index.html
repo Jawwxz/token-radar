@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — the launch board</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="mark">R</div>
+    <div>
+      <h1>Token Radar</h1>
+      <p class="tag">The launch board: every pre-token protocol the snapshot holds, ranked by what it is worth if it launches.</p>
+    </div>
+  </div>
+  <p class="meta" id="meta">Snapshot loading…</p>
+</header>
+<main>
+  <section class="lede" aria-label="What the board shows">
+    <p id="lede">Loading the board…</p>
+    <p class="note" id="lede-note"></p>
+  </section>
+
+  <section class="controls" aria-label="Filter and sort the board">
+    <label>Search
+      <input id="q" type="search" placeholder="Name or slug" autocomplete="off" spellcheck="false">
+    </label>
+    <label>Category
+      <select id="category"><option value="">All categories</option></select>
+    </label>
+    <label>Chain
+      <select id="chain"><option value="">All chains</option></select>
+    </label>
+    <label>Implied value
+      <select id="band">
+        <option value="">Any value</option>
+        <option value="b1">$1B and up</option>
+        <option value="b100m">$100M to $1B</option>
+        <option value="b10m">$10M to $100M</option>
+        <option value="b0">Under $10M</option>
+      </select>
+    </label>
+    <div class="tabs" role="tablist" aria-label="Token status">
+      <button id="tab-pre" role="tab" aria-selected="true">Pre-token</button>
+      <button id="tab-live" role="tab" aria-selected="false">Live token</button>
+    </div>
+  </section>
+
+  <section class="board-wrap" aria-label="The ranked board">
+    <table class="board" id="board">
+      <thead>
+        <tr>
+          <th data-sort="rank" aria-sort="descending">Rank</th>
+          <th data-sort="name">Protocol</th>
+          <th data-sort="category">Category</th>
+          <th data-sort="tvl_usd">TVL</th>
+          <th data-sort="change_7d">7d</th>
+          <th data-sort="age_days">Age</th>
+          <th data-sort="implied_value_usd">Implied value</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="count" id="count"></p>
+  </section>
+
+  <section class="model" aria-label="How the value is worked out">
+    <h2>How the value is worked out</h2>
+    <p id="model-text"></p>
+    <div class="model-grid">
+      <div>
+        <h3>The formula</h3>
+        <p class="formula">implied = TVL × multiple × growth × maturity × breadth</p>
+        <ul class="formula-notes" id="formula-notes"></ul>
+      </div>
+      <div>
+        <h3>Category multiples</h3>
+        <p class="small">Each multiple is the median market-cap-to-TVL ratio of that category's own token-bearing protocols, shrunk toward the global median. Thin categories lean on the global median; a single outlier token cannot set a multiple.</p>
+        <table class="multiples" id="multiples">
+          <thead><tr><th>Category</th><th>Multiple</th><th>Median</th><th>Tokens</th><th>Grounding</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+<dialog id="detail" aria-label="Protocol detail">
+  <div id="detail-body"></div>
+  <p class="dialog-actions"><button id="detail-close" type="button">Close</button></p>
+</dialog>
+<footer>
+  <p id="footer"></p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
